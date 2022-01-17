@@ -35,16 +35,22 @@ $('#file').on('change', function (e) {
 //未确定按钮，绑定点击事件
 $('#btnUpload').on('click', function () {
   //1.拿到用户裁剪之后的头像
-  var dataURL = $image.cropper('getCroppedCanvas', {
-    //创建一个Canvas画布
-    width: 100,
-    height: 100
-  })
-    .toDataURL('image/png')  //将Canvas画布上的内容，转化为base64格式的字符串
+  // var dataURL = $image.cropper('getCroppedCanvas', {
+  //   //创建一个Canvas画布
+  //   width: 100,
+  //   height: 100
+  // })
+  //   .toDataURL('image/png')  //将Canvas画布上的内容，转化为base64格式的字符串
+  var dataURL = $image
+    .cropper('getCroppedCanvas', { // 创建一个 Canvas 画布
+      width: 100,
+      height: 100
+    })
+    .toDataURL('image/png')       // 将 Canvas 画布上的内容，转化为 base64 格式的字符串
   //2.调用接口，把头像上传到服务器
   $.ajax({
     method: 'POST',
-    url: '/my/updata/avatar',
+    url: '/my/update/avatar',
     data: {
       avatar: dataURL
     },
